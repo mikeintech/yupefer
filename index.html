@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Yupefer — Interactive experiences for artists</title>
+<meta name="description" content="Yupefer builds interactive websites for artists and creators: album rollouts, tour pages and merch drops.">
+<meta name="theme-color" content="#0a0a0b">
+<meta property="og:title" content="Yupefer — Interactive experiences for artists">
+<meta property="og:description" content="Album rollouts, tour pages and merch drops that fans actually play with.">
+<meta property="og:image" content="media/belly.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0b;--ink:#f3f1ec;--dim:rgba(243,241,236,.55);--line:rgba(243,241,236,.12);--hot:#ff3d6e}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);color:var(--ink);-webkit-text-size-adjust:100%}
+body{font:400 16px/1.5 'Inter Tight',system-ui,sans-serif;min-height:100svh;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+/* soft glow behind the intro */
+body::before{content:'';position:fixed;inset:-20% -20% auto;height:70svh;background:radial-gradient(50% 60% at 30% 30%,rgba(255,61,110,.18),transparent 70%),radial-gradient(40% 50% at 80% 10%,rgba(140,70,255,.16),transparent 70%);pointer-events:none;z-index:-1}
+
+header{display:flex;justify-content:space-between;align-items:center;padding:20px 0}
+.mark{font-weight:600;letter-spacing:.02em}
+.mark i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--hot);margin-right:8px;box-shadow:0 0 12px var(--hot);animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.35}}
+.pill{border:1px solid var(--line);border-radius:99px;padding:8px 14px;font-size:13px;transition:background .25s,color .25s}
+.pill:hover{background:var(--ink);color:var(--bg)}
+
+.intro{padding:56px 0 40px}
+.intro h1{font:400 clamp(44px,11vw,104px)/.95 'Instrument Serif',serif;letter-spacing:-.02em}
+.intro h1 em{color:var(--hot)}
+.intro p{color:var(--dim);font-size:clamp(17px,2.4vw,20px);max-width:560px;margin-top:20px;font-weight:300}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.tags span{font-size:12px;border:1px solid var(--line);border-radius:99px;padding:6px 12px;color:var(--dim)}
+.intro>*{opacity:0;transform:translateY(16px);animation:rise .9s cubic-bezier(.2,.8,.2,1) forwards}
+.intro>*:nth-child(2){animation-delay:.12s}.intro>*:nth-child(3){animation-delay:.22s}
+@keyframes rise{to{opacity:1;transform:none}}
+
+.label{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);padding:18px 0 16px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+
+.grid{display:grid;gap:28px;padding-bottom:40px}
+@media(min-width:760px){.grid{grid-template-columns:1fr 1fr;gap:24px}}
+
+.work{display:block;opacity:0;transform:translateY(30px);transition:opacity .8s,transform .8s cubic-bezier(.2,.8,.2,1)}
+.work.seen{opacity:1;transform:none}
+.thumb{position:relative;aspect-ratio:16/10;border-radius:14px;overflow:hidden;background:#151517;border:1px solid var(--line);isolation:isolate}
+.thumb img,.thumb video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.8,.2,1),opacity .4s}
+.thumb video{opacity:0}
+.work.playing .thumb video{opacity:1}
+.work.playing .thumb img{opacity:0}
+.work:hover .thumb img,.work:hover .thumb video{transform:scale(1.04)}
+.open{position:absolute;right:12px;bottom:12px;z-index:2;display:flex;align-items:center;gap:6px;background:rgba(10,10,11,.7);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:99px;padding:8px 14px;font-size:13px;font-weight:500;transition:background .25s,color .25s,transform .4s}
+.work:hover .open{background:var(--ink);color:var(--bg);transform:translateY(-2px)}
+.live{position:absolute;left:12px;top:12px;z-index:2;font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:rgba(10,10,11,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-radius:99px;padding:5px 10px}
+.live::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:#3dff8a;margin-right:6px;vertical-align:1px}
+.meta{display:flex;justify-content:space-between;gap:16px;margin-top:14px}
+.meta h2{font:400 28px/1.05 'Instrument Serif',serif}
+.meta p{color:var(--dim);font-size:14px;margin-top:4px}
+.meta small{color:var(--dim);font-size:12px;white-space:nowrap;padding-top:6px}
+
+.next .thumb{display:grid;place-items:center;text-align:center;background:repeating-linear-gradient(135deg,#121214 0 12px,#151518 12px 24px)}
+.next .thumb b{font:italic 400 34px/1 'Instrument Serif',serif}
+.next .thumb span{display:block;color:var(--dim);font-size:13px;margin-top:8px}
+
+.cta{border-top:1px solid var(--line);padding:56px 0 30px;text-align:center}
+.cta h3{font:400 clamp(36px,8vw,64px)/1 'Instrument Serif',serif}
+.cta p{color:var(--dim);margin:12px auto 24px;max-width:420px}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--bg);border-radius:99px;padding:14px 22px;font-weight:500;transition:transform .3s}
+.btn:hover{transform:translateY(-2px)}
+footer{color:var(--dim);font-size:12px;padding:30px 0 calc(30px + env(safe-area-inset-bottom));text-align:center}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.work,.intro>*{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="mark" href="#"><i></i>yupefer</a>
+    <a class="pill" href="#contact">Work with me</a>
+  </header>
+
+  <section class="intro">
+    <h1>Hi, I'm Yupefer.<br>I build <em>interactive</em> experiences for artists.</h1>
+    <p>Album rollouts, tour pages and merch drops that fans don't just visit. They play with them, share them and come back.</p>
+    <div class="tags"><span>Web design</span><span>Development</span><span>Motion</span><span>3D</span></div>
+  </section>
+
+  <div class="label"><span>Atlanta Concepts</span><span>Tap to try it</span></div>
+
+  <main class="grid">
+    <a class="work" href="https://mikeintech.github.io/wtf-goin-tour/" target="_blank" rel="noopener">
+      <div class="thumb">
+        <span class="live">Live</span>
+        <img src="media/belly.jpg" alt="WTF Goin Tour site: tour poster tearing into a 3D map" loading="lazy">
+        <video src="media/belly.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+        <span class="open">Open experience ↗</span>
+      </div>
+      <div class="meta">
+        <div><h2>WTF Goin Tour</h2><p>Belly Gang Kushington · Tour map, fan requests, city merch</p></div>
+        <small>Pt. 2</small>
+      </div>
+    </a>
+
+    <a class="work" href="https://mikeintech.github.io/just-doin-me/" target="_blank" rel="noopener">
+      <div class="thumb">
+        <span class="live">Live</span>
+        <img src="media/nudy.jpg" alt="JUST DOIN ME site: a bandana album cover unfolding" loading="lazy">
+        <video src="media/nudy.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+        <span class="open">Open experience ↗</span>
+      </div>
+      <div class="meta">
+        <div><h2>JUST DOIN ME</h2><p>Young Nudy · Album rollout you unfold, tracklist, wallpapers</p></div>
+        <small>Pt. 1</small>
+      </div>
+    </a>
+
+    <a class="work next" href="#contact">
+      <div class="thumb"><div><b>Pt. 3 is loading…</b><span>Want it to be you? Let's talk.</span></div></div>
+      <div class="meta"><div><h2>Your rollout</h2><p>Album, tour, merch drop or launch</p></div><small>Next</small></div>
+    </a>
+  </main>
+
+  <section class="cta" id="contact">
+    <h3>Got a drop coming?</h3>
+    <p>I'll turn it into something people can't stop scrolling. Send me the date and the vibe.</p>
+    <a class="btn" href="https://instagram.com/yupefer" target="_blank" rel="noopener">DM me on Instagram ↗</a>
+  </section>
+
+  <footer>© 2026 Yupefer · Fan concepts are unofficial and not affiliated with the artists.</footer>
+</div>
+
+<script>
+// cards fade in, and their preview plays on hover (desktop) or while on screen (phone)
+const works=[...document.querySelectorAll('.work')];
+const canHover=matchMedia('(hover:hover)').matches, reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const play=(w,on)=>{const v=w.querySelector('video');if(!v||reduce)return;
+  if(on){v.preload='auto';v.play().then(()=>w.classList.add('playing')).catch(()=>{});}
+  else{v.pause();w.classList.remove('playing');}};
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting)e.target.classList.add('seen');
+  if(!canHover)play(e.target,e.intersectionRatio>.6);
+}),{threshold:[0,.15,.6,1]});
+works.forEach(w=>{io.observe(w);
+  if(canHover){w.addEventListener('mouseenter',()=>play(w,true));w.addEventListener('mouseleave',()=>play(w,false));}
+});
+</script>
+</body>
+</html>
