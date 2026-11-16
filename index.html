@@ -106,6 +106,18 @@ form .btn{border:0;cursor:pointer;font-size:16px;justify-self:start}
 .alt a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
 .sent{display:none;text-align:center;padding:30px 0}
 .sent b{font:italic 400 40px/1 'Instrument Serif',serif;display:block;margin-bottom:10px}
+/* featured client project */
+.feat{display:block;margin:6px 0 56px}
+.feat .thumb{aspect-ratio:16/10}
+@media(min-width:760px){.feat .thumb{aspect-ratio:16/9}}
+.feat .thumb video{opacity:1}
+.feat .thumb img,.feat .thumb video,.feat:hover .thumb img,.feat:hover .thumb video{transform:none!important}
+.feat:hover .open{background:var(--ink);color:var(--bg);transform:translateY(-2px)}
+.feat .live{background:rgba(10,10,11,.7)}
+.feat .meta h2{font-size:clamp(30px,4.4vw,48px)}
+.feat .meta p{font-size:15px;max-width:640px}
+.feat .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.feat .chips span{font-size:12px;letter-spacing:.06em;color:var(--dim);border:1px solid var(--line);border-radius:99px;padding:5px 11px}
 </style>
 </head>
 <body>
@@ -121,6 +133,22 @@ form .btn{border:0;cursor:pointer;font-size:16px;justify-self:start}
     <p>Album rollouts, tour pages and merch drops that fans don't just visit. They play with them, share them and come back.</p>
     <div class="tags"><span>Web design</span><span>Development</span><span>Motion</span><span>3D</span></div>
   </section>
+
+  <div class="label" id="featured"><span>Featured · Client Work</span><span>Live now</span></div>
+  <a class="feat" href="https://yfnlucci.com" target="_blank" rel="noopener">
+    <div class="thumb">
+      <span class="live">Live · yfnlucci.com</span>
+      <img src="media/lucci.jpg" alt="YFN Lucci album site: two gold frames holding both album covers above the disc switch">
+      <video src="media/lucci.mp4?v=7" poster="media/lucci.jpg" muted loop playsinline autoplay preload="auto" aria-hidden="true"></video>
+      <span class="open">Open experience ↗</span>
+    </div>
+    <div class="meta">
+      <div><h2>everything i said i am. / everything she said she is.</h2>
+        <p>YFN Lucci · A double album built as a world. Flip between both discs, watch the trailer on the jumbotron, walk a 3D trophy room of his plaques, spin the CDs and find the tour on the map.</p>
+        <div class="chips"><span>Double album rollout</span><span>3D trophy room</span><span>Live countdown</span><span>Pre-save + fan signup</span><span>Team CMS</span></div></div>
+      <small>Client · 2026</small>
+    </div>
+  </a>
 
   <div class="label" id="detroit"><span>Detroit Concepts</span><span>Tap to try it</span></div>
 
